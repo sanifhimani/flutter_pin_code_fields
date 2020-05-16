@@ -66,4 +66,4 @@ PinCodeFields(
     },
 ),
 ```
-![Default Example](screenshots/default.gif "Default Example"){:width="250px"}
+![Default Example](https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/default.gif "Default Example") <!-- .element height="50%" width="50%" -->
