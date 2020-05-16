@@ -72,9 +72,9 @@ packages:
   flutter_pin_code_fields:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: flutter_pin_code_fields
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.0"
   flutter_test:
     dependency: "direct dev"

@@ -1,16 +1,62 @@
-# example
+# Flutter Pin Code Fields Example
 
-A new Flutter project.
+Example on how to use the flutter_pin_code_fields package.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Add dependency in __`pubspec.yaml`__ file.
+```yaml
+dependencies:
+    flutter_pin_code_fields: <VERSION>
+```
 
-A few resources to get you started if this is your first Flutter project:
+# Examples
+## Default Usage
+```dart
+PinCodeFields(
+    length: 4,
+    onComplete: (output) {
+        // Your logic with pin code
+        print(output);
+    },
+),
+```
+## Obscure Fields
+```dart
+PinCodeFields(
+    length: 6,
+    obscureText: true,
+    obscureCharacter: '❌',
+    onComplete: (output) {
+        // Your logic with pin code
+        print(output);
+    },
+),
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Customized Fields
+```dart
+PinCodeFields(
+    length: 4,
+    fieldBorderStyle: FieldBorderStyle.Square,
+    responsive: false,
+    fieldHeight: 130.0,
+    fieldWidth: 130.0,
+    borderWidth: 5.0,
+    activeBorderColor: Colors.teal,
+    activeBackgroundColor: Colors.tealAccent,
+    borderRadius: BorderRadius.circular(20.0),
+    keyboardType: TextInputType.number,
+    autoHideKeyboard: false,
+    fieldBackgroundColor: Colors.lightGreenAccent,
+    borderColor: Colors.lightGreen,
+    textStyle: TextStyle(
+        fontSize: 30.0,
+        fontWeight: FontWeight.bold,
+    ),
+    onComplete: (output) {
+        // Your logic with pin code
+        print(output);
+    },
+),
+```
