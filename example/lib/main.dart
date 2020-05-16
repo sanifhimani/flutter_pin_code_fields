@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Default Pincode Fields',
+              'Custom Pincode Fields',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
@@ -41,17 +41,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(
-              height: 10.0,
+              height: 40.0,
             ),
-            PinCodeFields(
-              length: 4,
-              controller: newTextEditingController,
-              focusNode: focusNode,
-              onComplete: (result) {
-                // Your logic with code
-                print(result);
-              },
-            ),
+//            PinCodeFields(
+//              length: 4,
+//              controller: newTextEditingController,
+//              focusNode: focusNode,
+//              onComplete: (result) {
+//                // Your logic with code
+//                print(result);
+//              },
+//            ),
 //            SizedBox(
 //              height: 50.0,
 //            ),
@@ -66,29 +66,15 @@ class _MyHomePageState extends State<MyHomePage> {
 //            SizedBox(
 //              height: 10.0,
 //            ),
-//            PinCodeFields(
-//              length: 4,
-//              fieldBorderStyle: FieldBorderStyle.Square,
-//              responsive: false,
-//              fieldHeight: 130.0,
-//              fieldWidth: 130.0,
-//              borderWidth: 5.0,
-//              activeBorderColor: Colors.teal,
-//              activeBackgroundColor: Colors.tealAccent,
-//              borderRadius: BorderRadius.circular(20.0),
-//              keyboardType: TextInputType.number,
-//              autoHideKeyboard: false,
-//              fieldBackgroundColor: Colors.lightGreenAccent,
-//              borderColor: Colors.lightGreen,
-//              textStyle: TextStyle(
-//                fontSize: 30.0,
-//                fontWeight: FontWeight.bold,
-//              ),
-//              onComplete: (text) {
-//                // Your logic with code
-//                print(text);
-//              },
-//            ),
+            PinCodeFields(
+              length: 6,
+              obscureText: true,
+              obscureCharacter: '❌',
+              onComplete: (text) {
+                // Your logic with pin code
+                print(text);
+              },
+            ),
           ],
         ));
   }

@@ -60,11 +60,74 @@ onComplete | Function(String) | Callback that returns text on filling all the fi
 ```dart
 PinCodeFields(
     length: 4,
-    onComplete: (result) {
+    onComplete: (output) {
         // Your logic with pin code
-        print(result);
+        print(output);
     },
 ),
 ```
-![Default Example](https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/default.gif "Default Example")
-<!-- .element height="50%" width="50%" -->
+
+<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/default.gif">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/default.gif" alt="Default Example" title="Default Example" width="50%">
+</a>
+
+## Obscure Fields
+```dart
+PinCodeFields(
+    length: 6,
+    obscureText: true,
+    obscureCharacter: '❌',
+    onComplete: (output) {
+        // Your logic with pin code
+        print(output);
+    },
+),
+```
+
+<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/obscure.gif">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/obscure.gif" alt="Obscure Example" title="Obscure Example" width="50%">
+</a>
+
+## Customized Fields
+```dart
+PinCodeFields(
+    length: 4,
+    fieldBorderStyle: FieldBorderStyle.Square,
+    responsive: false,
+    fieldHeight: 130.0,
+    fieldWidth: 130.0,
+    borderWidth: 5.0,
+    activeBorderColor: Colors.teal,
+    activeBackgroundColor: Colors.tealAccent,
+    borderRadius: BorderRadius.circular(20.0),
+    keyboardType: TextInputType.number,
+    autoHideKeyboard: false,
+    fieldBackgroundColor: Colors.lightGreenAccent,
+    borderColor: Colors.lightGreen,
+    textStyle: TextStyle(
+        fontSize: 30.0,
+        fontWeight: FontWeight.bold,
+    ),
+    onComplete: (output) {
+        // Your logic with pin code
+        print(output);
+    },
+),
+```
+
+<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/custom.gif">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/custom.gif" alt="Custom Example" title="Custom Example" width="50%">
+</a>
+
+For complete example, refer `example/lib/main.dart`.
+
+# Contribute
+Star ⭐️ to show support!
+
+#### Have a new feature to add to this?
+
+1. Fork it.
+2. Create a branch for your feature (git checkout -b your-feature).
+3. Commit your changes (git commit -m "Feature Description").
+4. Push to the branch (git push origin your-feature).
+5. Create new pull request.
