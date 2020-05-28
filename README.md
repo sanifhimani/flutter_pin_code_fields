@@ -52,6 +52,11 @@ activeBackgroundColor | Color | Background color of the active/ highlighted fiel
 textStyle | TextStyle | Style of the text in the fields.
 keyboardType | TextInputType | Type of keyboard to use for the fields. Default is __`TextInputType.visiblePassword`__.
 autoHideKeyboard | bool | Automatically hide keyboard when the user reaches the last field or the first field (by delete). Default is __`true`__.
+animation | Animations | Animation for the text in the fields. Default is __`Animations.Fade`__. Animations contains: __`Animations.SlideInUp`__, __`Animations.SlideInDown`__, __`Animations.SlideInLeft`__, __`Animations.SlideInRight`__, __`Animations.Grow`__, __`Animations.Shrink`__, __`Animations.RotateLeft`__, __`Animations.RotateRight`__, __`Animations.Fade`__.
+animationDuration | Duration | Animation duration for the text in the fields. Default is __`Duration(milliseconds: 150)`__.
+animationCurve | Curve | Animation curve for the text in the fields. Default is __`Curves.easeInOut`__.
+switchInAnimationCurve | Curve | Animation switch in curve for the text in the fields. Default is __`Curves.easeIn`__.
+switchOutAnimationCurve | Curve | Animation switch out curve for the text in the fields. Default is __`Curves.easeOut`__.
 onChange | Function(String) | Callback that returns text on input.
 onComplete | Function(String) | Callback that returns text on filling all the fields. This property is __`required`__.
 
@@ -117,6 +122,32 @@ PinCodeFields(
 
 <a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/custom.gif">
 <img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/custom.gif" alt="Custom Example" title="Custom Example" width="50%">
+</a>
+
+## Animations for text
+```dart
+PinCodeFields(
+    length: 4,
+    animationDuration: const Duration(milliseconds: 200),
+    animationCurve: Curves.easeInOut,
+    switchInAnimationCurve: Curves.easeIn,
+    switchOutAnimationCurve: Curves.easeOut,
+    animation: Animations.SlideInDown,
+    onComplete: (output) {
+        // Your logic with code
+        print(output);
+    },
+),
+```
+
+<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/grow-animation.gif">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/grow-animation.gif" alt="Custom Example" title="Custom Example" width="35%">
+</a>
+<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/rotate-animation.gif">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/rotate-animation.gif" alt="Custom Example" title="Custom Example" width="35%">
+</a>
+<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/slide-animation.gif">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/slide-animation.gif" alt="Custom Example" title="Custom Example" width="35%">
 </a>
 
 For complete example, refer `example/lib/main.dart`.

@@ -5,60 +5,168 @@ import 'package:flutter/services.dart';
 
 class PinCodeFields extends StatefulWidget {
   @required
+
+  /// Total number of pin code fields.
   final int length;
+
+  /// Text editing controller for the fields.
   final TextEditingController controller;
+
+  /// Enable/ disable autofocus on the field.
   final bool autofocus;
+
+  /// Border style of the field.
   final FieldBorderStyle fieldBorderStyle;
+
+  /// Border width of the field.
   final double borderWidth;
+
+  /// Color of the border.
   final Color borderColor;
+
+  /// Height of the pin code fields.
   final double fieldHeight;
+
+  /// Width of the pin code fields.
   final double fieldWidth;
+
+  /// Border radius of the field.
   final BorderRadius borderRadius;
+
+  /// Border color of the active/ highlighted field.
   final Color activeBorderColor;
+
+  /// Background color of the fields.
   final Color fieldBackgroundColor;
+
+  /// Background color of the active/ highlighted field.
   final Color activeBackgroundColor;
+
+  /// Focus node for the fields.
   final FocusNode focusNode;
+
+  /// Enable/ disable editing on the fields.
   final bool enabled;
+
+  /// Automatically adjusts fields to the size of the screen or provided space.
   final bool responsive;
+
+  /// Hides the input text of the user.
   final bool obscureText;
+
+  /// Character that replaces the user's input when obscureText is true.
   final String obscureCharacter;
+
+  /// Provides margin between fields.
   final EdgeInsets margin;
+
+  /// Provides padding within the fields.
   final EdgeInsets padding;
+
+  /// Style of the text in the fields.
   final TextStyle textStyle;
+
+  /// Type of keyboard to use for the fields.
   final TextInputType keyboardType;
+
+  /// Automatically hide keyboard when the user reaches the last field or the first field (by delete).
   final bool autoHideKeyboard;
+
+  /// Animation for the text in the fields.
+  final Animations animation;
+
+  /// Animation duration for the text in the fields.
+  final Duration animationDuration;
+
+  /// Animation curves for the text in the fields.
+  final Curve animationCurve;
+
+  /// Animation switch in curve for the text in the fields.
+  final Curve switchInAnimationCurve;
+
+  /// Animation switch out curve for the text in the fields.
+  final Curve switchOutAnimationCurve;
+
+  /// Callback that returns text on input.
   final ValueChanged<String> onChange;
+
+  /// Callback that returns text on filling all the fields.
   @required
   final ValueChanged<String> onComplete;
 
   PinCodeFields({
+    /// Default length is 4.
     this.length = 4,
     this.controller,
+
+    /// autofocus is false by default.
     this.autofocus = false,
+
+    /// Default border style is bottom.
     this.fieldBorderStyle = FieldBorderStyle.Bottom,
+
+    /// Default width for border is 2.0.
     this.borderWidth = 2.0,
+
+    /// Default border color is grey.
     this.borderColor = Colors.grey,
     this.fieldHeight,
     this.fieldWidth,
     this.borderRadius,
+
+    /// Default active border color is blue.
     this.activeBorderColor = Colors.blue,
     this.fieldBackgroundColor,
     this.activeBackgroundColor,
     this.focusNode,
+
+    /// Text fields are enabled by default.
     this.enabled = true,
+
+    /// Responsive is true by default.
     this.responsive = true,
+
+    /// Obscure text is false by default.
     this.obscureText = false,
+
+    /// Default character for obscure text is *.
     this.obscureCharacter = "*",
+
+    /// Default margin between fields is 5.0.
     this.margin = const EdgeInsets.all(5.0),
+
+    /// Default padding in the fields is 5.0.
     this.padding = const EdgeInsets.only(bottom: 5.0),
+
+    /// Default text style for the fields.
     this.textStyle = const TextStyle(
       fontSize: 20.0,
     ),
+
+    /// Default keyboard type is visiblePassword by default.
     this.keyboardType = TextInputType.visiblePassword,
+
+    /// Auto hide keyboard is true by default.
     this.autoHideKeyboard = true,
+
+    /// Default animation for text is Fade.
+    this.animation = Animations.Fade,
+
+    /// Default duration for animation on text is 150ms.
+    this.animationDuration = const Duration(milliseconds: 150),
+
+    /// Default animation curve for animation on text is Curves.easeInOut.
+    this.animationCurve = Curves.easeInOut,
+
+    /// Default switch in animation curve for animation on text is Curves.easeIn.
+    this.switchInAnimationCurve = Curves.easeIn,
+
+    /// Default switch out animation curve for animation on text is Curves.easeOut.
+    this.switchOutAnimationCurve = Curves.easeOut,
     this.onChange,
     this.onComplete,
   });
+
   @override
   _PinCodeFieldsState createState() => _PinCodeFieldsState();
 }
@@ -66,7 +174,11 @@ class PinCodeFields extends StatefulWidget {
 class _PinCodeFieldsState extends State<PinCodeFields> {
   TextEditingController _textEditingController;
   FocusNode _focusNode;
+
+  /// Storing the input in this list.
   List<String> _inputList;
+
+  /// Keeps a track of selected pin code field.
   int _selectedIndex = 0;
 
   @override
@@ -82,12 +194,17 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     super.initState();
   }
 
+  /// function responsible for assigning controller to the text field.
   void _assignController() {
     if (widget.controller == null) {
       _textEditingController = TextEditingController();
     } else {
       _textEditingController = widget.controller;
     }
+
+    /// Text editing controllers' listener
+    /// Used to check which is the current field and set focus on that field,
+    /// populate onComplete callback.
     _textEditingController.addListener(() {
       var currentText = _textEditingController.text;
 
@@ -115,21 +232,25 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     });
   }
 
+  /// Initializing the input list to empty.
   void _initializeValues() {
     for (int i = 0; i < _inputList.length; i++) {
       _inputList[i] = "";
     }
   }
 
+  /// Checking if the requested text field has focus or not.
   void _onFocus() {
     if (_focusNode.hasFocus) {
       _focusNode.unfocus();
     }
 
+    /// Launching keyboard.
     FocusScope.of(context).requestFocus(_focusNode);
     SystemChannels.textInput.invokeMethod('TextInput.show');
   }
 
+  /// Populating the input list with the text that the user inputs.
   void _setTextToInput(String data) async {
     var replaceInputList = List<String>(widget.length);
 
@@ -139,7 +260,6 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
       } else {
         replaceInputList[i] = "";
       }
-//      replaceInputList[i] = data.length > i ? data[i] : "";
     }
 
     setState(() {
@@ -148,6 +268,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     });
   }
 
+  /// Setting the color of the active text field using _selectedIndex.
   Color _getColorFromIndex(int index) {
     if (!widget.enabled) {
       return widget.borderColor;
@@ -162,6 +283,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     return widget.borderColor;
   }
 
+  /// Setting the background color of the active text field using _selectedIndex.
   Color _getBackgroundColorFromIndex(int index) {
     if (!widget.enabled) {
       return widget.fieldBackgroundColor;
@@ -176,6 +298,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     return widget.fieldBackgroundColor;
   }
 
+  /// Generating border of the field by using enum FieldBorderStyle.
   Border _generateBorder(int index) {
     if (widget.fieldBorderStyle == FieldBorderStyle.Square) {
       return Border.all(
@@ -225,6 +348,84 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     }
   }
 
+  /// Generating animation for text based on the animation selected.
+  Widget _getAnimation(Widget child, Animation animation) {
+    if (widget.animation == Animations.SlideInUp) {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, .5),
+          end: Offset.zero,
+        ).animate(animation),
+        child: child,
+      );
+    } else if (widget.animation == Animations.SlideInDown) {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, -.5),
+          end: Offset.zero,
+        ).animate(animation),
+        child: child,
+      );
+    } else if (widget.animation == Animations.SlideInRight) {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(1, 0),
+          end: Offset.zero,
+        ).animate(animation),
+        child: child,
+      );
+    } else if (widget.animation == Animations.SlideInLeft) {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(-1, 0),
+          end: Offset.zero,
+        ).animate(animation),
+        child: child,
+      );
+    } else if (widget.animation == Animations.RotateLeft) {
+      return RotationTransition(
+        turns: Tween<double>(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(animation),
+        child: child,
+      );
+    } else if (widget.animation == Animations.RotateRight) {
+      return RotationTransition(
+        turns: Tween<double>(
+          begin: 1.0,
+          end: 0.0,
+        ).animate(animation),
+        child: child,
+      );
+    } else if (widget.animation == Animations.Grow) {
+      return ScaleTransition(
+        scale: Tween<double>(
+          begin: 0,
+          end: 1,
+        ).animate(animation),
+        child: child,
+      );
+    } else if (widget.animation == Animations.Shrink) {
+      return ScaleTransition(
+        scale: Tween<double>(
+          begin: 1.5,
+          end: 1,
+        ).animate(animation),
+        child: child,
+      );
+    } else {
+      return FadeTransition(
+        opacity: Tween<double>(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(animation),
+        child: child,
+      );
+    }
+  }
+
+  /// Generating text fields based on the length of text field provided and the bool value of responsive.
   Widget _generateTextField(int index) {
     return !widget.responsive
         ? Container(
@@ -232,8 +433,8 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
             child: AnimatedContainer(
               margin: widget.margin,
               padding: widget.padding,
-              curve: Curves.easeInOut,
-              duration: const Duration(milliseconds: 150),
+              curve: widget.animationCurve,
+              duration: widget.animationDuration,
               width: widget.fieldWidth,
               height: widget.fieldHeight,
               decoration: BoxDecoration(
@@ -243,17 +444,11 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
               ),
               child: Center(
                 child: AnimatedSwitcher(
-                  switchInCurve: Curves.easeInOut,
-                  switchOutCurve: Curves.easeInOut,
-                  duration: const Duration(milliseconds: 150),
+                  switchInCurve: widget.switchInAnimationCurve,
+                  switchOutCurve: widget.switchOutAnimationCurve,
+                  duration: widget.animationDuration,
                   transitionBuilder: (child, animation) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(0, .5),
-                        end: Offset.zero,
-                      ).animate(animation),
-                      child: child,
-                    );
+                    return _getAnimation(child, animation);
                   },
                   child: Text(
                     widget.obscureText
@@ -271,8 +466,8 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
             child: AnimatedContainer(
               margin: widget.margin,
               padding: widget.padding,
-              curve: Curves.easeInOut,
-              duration: const Duration(milliseconds: 150),
+              curve: widget.animationCurve,
+              duration: widget.animationDuration,
               height: widget.fieldHeight,
               decoration: BoxDecoration(
                 color: _getBackgroundColorFromIndex(index),
@@ -281,17 +476,11 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
               ),
               child: Center(
                 child: AnimatedSwitcher(
-                  switchInCurve: Curves.easeInOut,
-                  switchOutCurve: Curves.easeInOut,
-                  duration: const Duration(milliseconds: 150),
+                  switchInCurve: widget.switchInAnimationCurve,
+                  switchOutCurve: widget.switchOutAnimationCurve,
+                  duration: widget.animationDuration,
                   transitionBuilder: (child, animation) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(0, .5),
-                        end: Offset.zero,
-                      ).animate(animation),
-                      child: child,
-                    );
+                    return _getAnimation(child, animation);
                   },
                   child: Text(
                     widget.obscureText
@@ -375,6 +564,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
   }
 }
 
+/// Styles for fields border.
 enum FieldBorderStyle {
   Square,
   Top,
@@ -383,4 +573,17 @@ enum FieldBorderStyle {
   Right,
   TopBottom,
   LeftRight,
+}
+
+/// Animation for the text in the pin code fields.
+enum Animations {
+  SlideInUp,
+  SlideInDown,
+  SlideInLeft,
+  SlideInRight,
+  Grow,
+  Shrink,
+  RotateRight,
+  RotateLeft,
+  Fade,
 }

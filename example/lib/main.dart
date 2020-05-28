@@ -23,6 +23,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController newTextEditingController = TextEditingController();
   FocusNode focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    newTextEditingController.dispose();
+    focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,6 +120,32 @@ class _MyHomePageState extends State<MyHomePage> {
               onComplete: (output) {
                 // Your logic with pin code
                 print(output);
+              },
+            ),
+            SizedBox(
+              height: 80.0,
+            ),
+            Text(
+              'Animated Pincode Fields',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            PinCodeFields(
+              length: 4,
+              animationDuration: const Duration(milliseconds: 200),
+              animationCurve: Curves.easeInOut,
+              switchInAnimationCurve: Curves.easeIn,
+              switchOutAnimationCurve: Curves.easeOut,
+              animation: Animations.SlideInDown,
+              onComplete: (result) {
+                // Your logic with code
+                print(result);
               },
             ),
             SizedBox(
