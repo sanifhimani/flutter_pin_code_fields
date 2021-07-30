@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PinCodeFields extends StatefulWidget {
-  @required
-
   /// Total number of pin code fields.
   final int length;
 
   /// Text editing controller for the fields.
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   /// Enable/ disable autofocus on the field.
   final bool autofocus;
@@ -25,25 +23,25 @@ class PinCodeFields extends StatefulWidget {
   final Color borderColor;
 
   /// Height of the pin code fields.
-  final double fieldHeight;
+  final double? fieldHeight;
 
   /// Width of the pin code fields.
-  final double fieldWidth;
+  final double? fieldWidth;
 
   /// Border radius of the field.
-  final BorderRadius borderRadius;
+  final BorderRadius? borderRadius;
 
   /// Border color of the active/ highlighted field.
   final Color activeBorderColor;
 
   /// Background color of the fields.
-  final Color fieldBackgroundColor;
+  final Color? fieldBackgroundColor;
 
   /// Background color of the active/ highlighted field.
-  final Color activeBackgroundColor;
+  final Color? activeBackgroundColor;
 
   /// Focus node for the fields.
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
   /// Enable/ disable editing on the fields.
   final bool enabled;
@@ -88,7 +86,7 @@ class PinCodeFields extends StatefulWidget {
   final Curve switchOutAnimationCurve;
 
   /// Callback that returns text on input.
-  final ValueChanged<String> onChange;
+  final ValueChanged<String>? onChange;
 
   /// Callback that returns text on filling all the fields.
   @required
@@ -164,7 +162,7 @@ class PinCodeFields extends StatefulWidget {
     /// Default switch out animation curve for animation on text is Curves.easeOut.
     this.switchOutAnimationCurve = Curves.easeOut,
     this.onChange,
-    this.onComplete,
+    required this.onComplete,
   });
 
   @override
@@ -172,11 +170,11 @@ class PinCodeFields extends StatefulWidget {
 }
 
 class _PinCodeFieldsState extends State<PinCodeFields> {
-  TextEditingController _textEditingController;
-  FocusNode _focusNode;
+  late TextEditingController _textEditingController;
+  late FocusNode _focusNode;
 
   /// Storing the input in this list.
-  List<String> _inputList;
+  late List<String> _inputList;
 
   /// Keeps a track of selected pin code field.
   int _selectedIndex = 0;
@@ -189,7 +187,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     _focusNode.addListener(() {
       setState(() {});
     });
-    _inputList = List<String>(widget.length);
+    _inputList = List<String>.filled(widget.length, '', growable: false);
     _initializeValues();
     super.initState();
   }
@@ -199,7 +197,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
     if (widget.controller == null) {
       _textEditingController = TextEditingController();
     } else {
-      _textEditingController = widget.controller;
+      _textEditingController = widget.controller!;
     }
 
     /// Text editing controllers' listener
@@ -210,12 +208,10 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
 
       if (widget.enabled && _inputList.join("") != currentText) {
         if (currentText.length >= widget.length) {
-          if (widget.onComplete != null) {
-            if (currentText.length > widget.length) {
-              currentText = currentText.substring(0, widget.length);
-            }
-            widget.onComplete(currentText);
+          if (currentText.length > widget.length) {
+            currentText = currentText.substring(0, widget.length);
           }
+          widget.onComplete(currentText);
           if (widget.autoHideKeyboard) {
             _focusNode.unfocus();
           }
@@ -225,7 +221,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
           }
         }
         if (widget.onChange != null) {
-          widget.onChange(currentText);
+          widget.onChange!(currentText);
         }
       }
       _setTextToInput(currentText);
@@ -252,7 +248,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
 
   /// Populating the input list with the text that the user inputs.
   void _setTextToInput(String data) async {
-    var replaceInputList = List<String>(widget.length);
+    var replaceInputList = List<String>.filled(widget.length, '');
 
     for (int i = 0; i < widget.length; i++) {
       if (data.length > i) {
@@ -286,16 +282,16 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
   /// Setting the background color of the active text field using _selectedIndex.
   Color _getBackgroundColorFromIndex(int index) {
     if (!widget.enabled) {
-      return widget.fieldBackgroundColor;
+      return widget.fieldBackgroundColor ?? Colors.transparent;
     }
     if (((_selectedIndex == index) ||
             (_selectedIndex == index + 1 && index + 1 == widget.length)) &&
         _focusNode.hasFocus) {
-      return widget.activeBackgroundColor;
+      return widget.activeBackgroundColor ?? Colors.transparent;
     } else if (_selectedIndex > index) {
-      return widget.fieldBackgroundColor;
+      return widget.fieldBackgroundColor ?? Colors.transparent;
     }
-    return widget.fieldBackgroundColor;
+    return widget.fieldBackgroundColor ?? Colors.transparent;
   }
 
   /// Generating border of the field by using enum FieldBorderStyle.
@@ -349,7 +345,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
   }
 
   /// Generating animation for text based on the animation selected.
-  Widget _getAnimation(Widget child, Animation animation) {
+  Widget _getAnimation(Widget child, Animation<double> animation) {
     if (widget.animation == Animations.SlideInUp) {
       return SlideTransition(
         position: Tween<Offset>(
