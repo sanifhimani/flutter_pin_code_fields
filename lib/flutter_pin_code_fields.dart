@@ -101,7 +101,7 @@ class PinCodeFields extends StatefulWidget {
     this.autofocus = false,
 
     /// Default border style is bottom.
-    this.fieldBorderStyle = FieldBorderStyle.Bottom,
+    this.fieldBorderStyle = FieldBorderStyle.bottom,
 
     /// Default width for border is 2.0.
     this.borderWidth = 2.0,
@@ -148,7 +148,7 @@ class PinCodeFields extends StatefulWidget {
     this.autoHideKeyboard = true,
 
     /// Default animation for text is Fade.
-    this.animation = Animations.Fade,
+    this.animation = Animations.fade,
 
     /// Default duration for animation on text is 150ms.
     this.animationDuration = const Duration(milliseconds: 150),
@@ -166,10 +166,10 @@ class PinCodeFields extends StatefulWidget {
   });
 
   @override
-  _PinCodeFieldsState createState() => _PinCodeFieldsState();
+  PinCodeFieldsState createState() => PinCodeFieldsState();
 }
 
-class _PinCodeFieldsState extends State<PinCodeFields> {
+class PinCodeFieldsState extends State<PinCodeFields> {
   late TextEditingController _textEditingController;
   late FocusNode _focusNode;
 
@@ -215,7 +215,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
           if (widget.autoHideKeyboard) {
             _focusNode.unfocus();
           }
-        } else if (currentText.length == 0) {
+        } else if (currentText.isEmpty) {
           if (widget.autoHideKeyboard) {
             _focusNode.unfocus();
           }
@@ -296,39 +296,39 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
 
   /// Generating border of the field by using enum FieldBorderStyle.
   Border _generateBorder(int index) {
-    if (widget.fieldBorderStyle == FieldBorderStyle.Square) {
+    if (widget.fieldBorderStyle == FieldBorderStyle.square) {
       return Border.all(
         color: _getColorFromIndex(index),
         width: widget.borderWidth,
       );
-    } else if (widget.fieldBorderStyle == FieldBorderStyle.Top) {
+    } else if (widget.fieldBorderStyle == FieldBorderStyle.top) {
       return Border(
         top: BorderSide(
           width: widget.borderWidth,
           color: _getColorFromIndex(index),
         ),
       );
-    } else if (widget.fieldBorderStyle == FieldBorderStyle.Left) {
+    } else if (widget.fieldBorderStyle == FieldBorderStyle.left) {
       return Border(
         left: BorderSide(
           width: widget.borderWidth,
           color: _getColorFromIndex(index),
         ),
       );
-    } else if (widget.fieldBorderStyle == FieldBorderStyle.Right) {
+    } else if (widget.fieldBorderStyle == FieldBorderStyle.right) {
       return Border(
         right: BorderSide(
           width: widget.borderWidth,
           color: _getColorFromIndex(index),
         ),
       );
-    } else if (widget.fieldBorderStyle == FieldBorderStyle.LeftRight) {
+    } else if (widget.fieldBorderStyle == FieldBorderStyle.leftRight) {
       return Border.symmetric(
           horizontal: BorderSide(
         width: widget.borderWidth,
         color: _getColorFromIndex(index),
       ));
-    } else if (widget.fieldBorderStyle == FieldBorderStyle.TopBottom) {
+    } else if (widget.fieldBorderStyle == FieldBorderStyle.topBottom) {
       return Border.symmetric(
           vertical: BorderSide(
         width: widget.borderWidth,
@@ -346,7 +346,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
 
   /// Generating animation for text based on the animation selected.
   Widget _getAnimation(Widget child, Animation<double> animation) {
-    if (widget.animation == Animations.SlideInUp) {
+    if (widget.animation == Animations.slideInUp) {
       return SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(0, .5),
@@ -354,7 +354,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
         ).animate(animation),
         child: child,
       );
-    } else if (widget.animation == Animations.SlideInDown) {
+    } else if (widget.animation == Animations.slideInDown) {
       return SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(0, -.5),
@@ -362,7 +362,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
         ).animate(animation),
         child: child,
       );
-    } else if (widget.animation == Animations.SlideInRight) {
+    } else if (widget.animation == Animations.slideInRight) {
       return SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(1, 0),
@@ -370,7 +370,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
         ).animate(animation),
         child: child,
       );
-    } else if (widget.animation == Animations.SlideInLeft) {
+    } else if (widget.animation == Animations.slideInLeft) {
       return SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(-1, 0),
@@ -378,7 +378,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
         ).animate(animation),
         child: child,
       );
-    } else if (widget.animation == Animations.RotateLeft) {
+    } else if (widget.animation == Animations.rotateLeft) {
       return RotationTransition(
         turns: Tween<double>(
           begin: 0.0,
@@ -386,7 +386,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
         ).animate(animation),
         child: child,
       );
-    } else if (widget.animation == Animations.RotateRight) {
+    } else if (widget.animation == Animations.rotateRight) {
       return RotationTransition(
         turns: Tween<double>(
           begin: 1.0,
@@ -394,7 +394,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
         ).animate(animation),
         child: child,
       );
-    } else if (widget.animation == Animations.Grow) {
+    } else if (widget.animation == Animations.grow) {
       return ScaleTransition(
         scale: Tween<double>(
           begin: 0,
@@ -402,7 +402,7 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
         ).animate(animation),
         child: child,
       );
-    } else if (widget.animation == Animations.Shrink) {
+    } else if (widget.animation == Animations.shrink) {
       return ScaleTransition(
         scale: Tween<double>(
           begin: 1.5,
@@ -562,24 +562,24 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
 
 /// Styles for fields border.
 enum FieldBorderStyle {
-  Square,
-  Top,
-  Bottom,
-  Left,
-  Right,
-  TopBottom,
-  LeftRight,
+  square,
+  top,
+  bottom,
+  left,
+  right,
+  topBottom,
+  leftRight,
 }
 
 /// Animation for the text in the pin code fields.
 enum Animations {
-  SlideInUp,
-  SlideInDown,
-  SlideInLeft,
-  SlideInRight,
-  Grow,
-  Shrink,
-  RotateRight,
-  RotateLeft,
-  Fade,
+  slideInUp,
+  slideInDown,
+  slideInLeft,
+  slideInRight,
+  grow,
+  shrink,
+  rotateRight,
+  rotateLeft,
+  fade,
 }
