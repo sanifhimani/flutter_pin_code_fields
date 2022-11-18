@@ -1,3 +1,7 @@
+## [1.2.0]
+- Support null safety
+- Updated SDK version
+
 ## [1.1.0]
 - Added customization for animation on text.
 - Updated example with animations.
