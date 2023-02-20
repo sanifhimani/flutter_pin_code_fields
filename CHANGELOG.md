@@ -1,3 +1,6 @@
+## [2.0.1]
+- Fix README
+
 ## [2.0.0]
 - Fix for flutter web - not accepting keyboard inputs.
 - Code cleanup/ refactoring
