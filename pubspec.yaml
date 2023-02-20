@@ -1,6 +1,6 @@
 name: flutter_pin_code_fields
 description: A flutter package which will help you generate customizable pin code fields. Can be used for login pins or OTP.
-version: 1.2.0
+version: 2.0.0
 homepage: https://github.com/sanifhimani/flutter_pin_code_fields
 repository: https://github.com/sanifhimani/flutter_pin_code_fields
 issue_tracker: https://github.com/sanifhimani/flutter_pin_code_fields/issues
