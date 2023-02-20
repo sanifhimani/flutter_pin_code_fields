@@ -116,7 +116,7 @@ PinCodeFields(
 # Properties
 Name | Type | Default | Description
 | --- |---|---|---|
-length | `int` | 4 | Total number of pin code fields.
+length | `int` | `4` | Total number of pin code fields.
 margin | `EdgeInsets` | `EdgeInsets.all(5.0)` | Margin between the fields.
 padding | `EdgeInsets` | `EdgeInsets.only(bottom: 5.0)` | Padding within the field.
 fieldHeight | `double` || Height of the field.
