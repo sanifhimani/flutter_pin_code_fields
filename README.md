@@ -1,164 +1,147 @@
 # Flutter Pin Code Fields
 
-A flutter package which will help you generate customizable pin code fields. Can be used for login pins or OTP.
+![GitHub workflow status](https://github.com/sanifhimani/flutter_pin_code_fields/actions/workflows/ci.yml/badge.svg) [![Version](https://img.shields.io/pub/v/flutter_pin_code_fields.svg)](https://pub.dev/packages/flutter_pin_code_fields) ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)
 
-# Installation
+A Flutter package to generate customizable pin code fields.
 
-## 1. Add Dependency
-Add this to your `pubspec.yaml` file:
+⭐️ to show support!
+
+## Features
+* Highly customizable
+* Responsive
+* Supports animations
+* Supports autofocus
+* Supports obscuring text with custom character
+
+# Usage
+
+Add `flutter_pin_code_fields` as a dependency in your `pubspec.yaml` file.
+
 ```yaml
-dependencies:
-    flutter_pin_code_fields: <VERSION>
-```
-## 2. Install
-Install the package from command line either using FLutter or Pub:
+# pubspec.yaml
 
-Using Pub:
-```shell
-$ pub get
+dependencies:
+  flutter_pin_code_fields: <latest_version>
 ```
-Using Flutter:
-```shell
-$ flutter packages get
-```
-## 3. Import Package
-Import the package in the `Dart` file to use it:
+
 ```dart
-import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
+import import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PinCodeFields(
+      onComplete(text) => print(text);
+    );
+  }
+}
+```
+
+# Examples
+
+## Basic
+
+Complete example at `example/lib/basic.dart`.
+
+<img src="./img/basic.gif" alt="Example - Basic" title="Example - Basic" width="40%">
+
+```dart
+PinCodeFields(
+  onComplete(text) => print(text),
+)
+```
+
+## Obscuring text
+
+Complete example at `example/lib/obscuring_text.dart`.
+
+<img src="./img/obscuring_text.gif" alt="Example - Obscuring text" title="Example - Obscuring text" width="40%">
+
+```dart
+PinCodeFields(
+  length: 6,
+  obscureText: true,
+  obscureCharacter: "🔴",
+  onComplete(text) => print(text),
+)
+```
+
+## Customized
+
+Complete example at `example/lib/customized.dart`.
+
+<img src="./img/customized.gif" alt="Example - Customized" title="Example - Customized" width="40%">
+
+```dart
+PinCodeFields(
+  length: 4,
+  fieldBorderStyle: FieldBorderStyle.square,
+  responsive: false,
+  fieldHeight: 130.0,
+  fieldWidth: 130.0,
+  borderWidth: 5.0,
+  activeBorderColor: Colors.blue,
+  activeBackgroundColor: Colors.white,
+  borderRadius: BorderRadius.circular(20.0),
+  keyboardType: TextInputType.number,
+  autoHideKeyboard: false,
+  fieldBackgroundColor: Colors.black12,
+  borderColor: Colors.black12,
+  textStyle: TextStyle(
+    fontSize: 30.0,
+    fontWeight: FontWeight.bold,
+  ),
+  onComplete(text) => print(text),
+)
+```
+
+## Animated
+
+Complete example at `example/lib/animated.dart`.
+
+<img src="./img/animated.gif" alt="Example - Animated" title="Example - Animated" width="40%">
+
+```dart
+PinCodeFields(
+  obscureText: true,
+  obscureCharacter: "❌",
+  animation: Animations.rotateRight,
+  animationDuration: Duration(milliseconds: 250),
+  animationCurve: Curves.bounceInOut,
+  switchInAnimationCurve: Curves.bounceIn,
+  switchOutAnimationCurve: Curves.bounceOut,
+)
 ```
 
 # Properties
-Name | Type | Description
-| --- |---|---|
-length | int | Total number of pin code fields. This property is __`required`__.
-controller | TextEditingController | Text editing controller for the fields.
-focusNode | FocusNode | Focus node for the fields.
-autofocus | bool | Enable/ disable autofocus on the field. Default is __`false`__.
-fieldHeight | double | Height of the pin code fields.
-fieldWidth | double | Width of the pin code fields.
-enabled | bool | Enable/ disable editing on the fields. Default is __`true`__.
-responsive | bool | Automatically adjusts fields to the size of the screen or provided space. Default is __`true`__.
-obscureText | bool | Hides the input text of the user. Default is __`false`__.
-obscureCharacter | String | Character that replaces the user's input when __`obscureText`__ is __`true`__. Default is __`'*'`__.
-margin | EdgeInsets | Provides margin between fields. Default is __`EdgeInsets.all(5.0)`__.
-padding | EdgeInsets | Provides padding within the fields. Default is __`EdgeInsets.only(bottom: 5.0)`__.
-fieldBorderStyle | FieldBorderStyle | Border style of the field. Default is __`FieldBorderStyle.Bottom`__. FieldBorderStyle contains: __`Square`__, __`Top`__, __`Bottom`__, __`Left`__, __`Right`__, __`TopBottom`__ and __`LeftRight`__.
-borderWidth | double | Border width of the field. Default is __`2.0`__.
-borderRadius | BorderRadius | Border radius of the field. Default is __`BorderRadius.zero`__.
-borderColor | Color | Color of the border. Default is __`Colors.grey`__.
-activeBorderColor | Color | Border color of the active/ highlighted field.
-fieldBackgroundColor | Color | Background color of the fields.
-activeBackgroundColor | Color | Background color of the active/ highlighted field.
-textStyle | TextStyle | Style of the text in the fields.
-keyboardType | TextInputType | Type of keyboard to use for the fields. Default is __`TextInputType.visiblePassword`__.
-autoHideKeyboard | bool | Automatically hide keyboard when the user reaches the last field or the first field (by delete). Default is __`true`__.
-animation | Animations | Animation for the text in the fields. Default is __`Animations.Fade`__. Animations contains: __`Animations.SlideInUp`__, __`Animations.SlideInDown`__, __`Animations.SlideInLeft`__, __`Animations.SlideInRight`__, __`Animations.Grow`__, __`Animations.Shrink`__, __`Animations.RotateLeft`__, __`Animations.RotateRight`__, __`Animations.Fade`__.
-animationDuration | Duration | Animation duration for the text in the fields. Default is __`Duration(milliseconds: 150)`__.
-animationCurve | Curve | Animation curve for the text in the fields. Default is __`Curves.easeInOut`__.
-switchInAnimationCurve | Curve | Animation switch in curve for the text in the fields. Default is __`Curves.easeIn`__.
-switchOutAnimationCurve | Curve | Animation switch out curve for the text in the fields. Default is __`Curves.easeOut`__.
-onChange | Function(String) | Callback that returns text on input.
-onComplete | Function(String) | Callback that returns text on filling all the fields. This property is __`required`__.
-
-# Examples
-## Default Usage
-```dart
-PinCodeFields(
-    length: 4,
-    onComplete: (output) {
-        // Your logic with pin code
-        print(output);
-    },
-),
-```
-
-<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/default.gif">
-<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/default.gif" alt="Default Example" title="Default Example" width="50%">
-</a>
-
-## Obscure Fields
-```dart
-PinCodeFields(
-    length: 6,
-    obscureText: true,
-    obscureCharacter: '❌',
-    onComplete: (output) {
-        // Your logic with pin code
-        print(output);
-    },
-),
-```
-
-<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/obscure.gif">
-<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/obscure.gif" alt="Obscure Example" title="Obscure Example" width="50%">
-</a>
-
-## Customized Fields
-```dart
-PinCodeFields(
-    length: 4,
-    fieldBorderStyle: FieldBorderStyle.Square,
-    responsive: false,
-    fieldHeight: 130.0,
-    fieldWidth: 130.0,
-    borderWidth: 5.0,
-    activeBorderColor: Colors.teal,
-    activeBackgroundColor: Colors.tealAccent,
-    borderRadius: BorderRadius.circular(20.0),
-    keyboardType: TextInputType.number,
-    autoHideKeyboard: false,
-    fieldBackgroundColor: Colors.lightGreenAccent,
-    borderColor: Colors.lightGreen,
-    textStyle: TextStyle(
-        fontSize: 30.0,
-        fontWeight: FontWeight.bold,
-    ),
-    onComplete: (output) {
-        // Your logic with pin code
-        print(output);
-    },
-),
-```
-
-<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/custom.gif">
-<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/custom.gif" alt="Custom Example" title="Custom Example" width="50%">
-</a>
-
-## Animations for text
-```dart
-PinCodeFields(
-    length: 4,
-    animationDuration: const Duration(milliseconds: 200),
-    animationCurve: Curves.easeInOut,
-    switchInAnimationCurve: Curves.easeIn,
-    switchOutAnimationCurve: Curves.easeOut,
-    animation: Animations.SlideInDown,
-    onComplete: (output) {
-        // Your logic with code
-        print(output);
-    },
-),
-```
-
-<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/grow-animation.gif">
-<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/grow-animation.gif" alt="Custom Example" title="Custom Example" width="35%">
-</a>
-<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/rotate-animation.gif">
-<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/rotate-animation.gif" alt="Custom Example" title="Custom Example" width="35%">
-</a>
-<a href="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/slide-animation.gif">
-<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/screenshots/slide-animation.gif" alt="Custom Example" title="Custom Example" width="35%">
-</a>
-
-For complete example, refer `example/lib/main.dart`.
-
-# Contribute
-Star ⭐️ to show support!
-
-#### Have a new feature to add to this?
-
-1. Fork it.
-2. Create a branch for your feature (git checkout -b your-feature).
-3. Commit your changes (git commit -m "Feature Description").
-4. Push to the branch (git push origin your-feature).
-5. Create new pull request.
+Name | Type | Default | Description
+| --- |---|---|---|
+length | `int` | 4 | Total number of pin code fields.
+margin | `EdgeInsets` | `EdgeInsets.all(5.0)` | Margin between the fields.
+padding | `EdgeInsets` | `EdgeInsets.only(bottom: 5.0)` | Padding within the field.
+fieldHeight | `double` || Height of the field.
+fieldWidth | `double` || Width of the field.
+borderWidth | `double` | 2.0 | Width of the border of the field.
+borderRadius | `BorderRadius` || Border raduis of the field.
+borderColor | `Color` | `Colors.grey`| Border color of the field.
+activeBorderColor | `Color` | `Colors.blue`| Border color of the active field.
+fieldBorderStyle | `FieldBorderStyle` | `FieldBorderStyle.bottom` | Border styles of the field.
+fieldBackgroundColor | `Color` | `Colors.transparent` | Background color of the fields.
+activeBackgroundColor | `Color` | `Colors.transparent` | Background color of the active field.
+enabled | `bool` | `true` | Enable/ disable editing the fields.
+responsive | `bool` | `true` | Adjust the size of the fields automatically to the available space.
+autofocus | `bool` | `false` | Enable/ disabled autofocus.
+textStyle | `TextStyle` || Text style for the fields.
+obscureText | `bool` | `false` | Enable/ disable obscuring the text in the fields.
+obscureCharacter | `String` | `*` | Character to obscure the text in the fields.
+keyboardType | `TextInputType` | `TextInputType.visiblePassword` | Keyboard type.
+autoHideKeyboard | `bool` | `true` | Hides the keyboard automatically on complete.
+animation | `Animations` | `Animations.fade` | Animation for the fields.
+animationDuration | `Duration` | `Duration(milliseconds: 150)` | Duration of the animation.
+animationCurve | `Curve` | `Curves.easeInOut` | Animation curve.
+switchInAnimationCurve | `Curve` | `Curves.easeIn` | Switch in animation curve.
+switchOutAnimationCurve | `Curve` | `Curves.easeOut` | Switch out animation curve.
+controller | `TextEditingController` || Text editing controller for the fields.
+focusNode | `FocusNode` || Focus node for the fields.
+onChange | `ValueChanged<String>` || Callback that returns text on input.
+onComplete [`required`] | `ValueChanged<String>` || Callback that returns text on filling all the fields.
