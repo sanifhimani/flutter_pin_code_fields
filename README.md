@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
 
 Complete example at `example/lib/basic.dart`.
 
-<img src="./img/basic.gif" alt="Example - Basic" title="Example - Basic" width="40%">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/img/basic.gif" alt="Example - Basic" title="Example - Basic" width="40%">
 
 ```dart
 PinCodeFields(
@@ -55,7 +55,7 @@ PinCodeFields(
 
 Complete example at `example/lib/obscuring_text.dart`.
 
-<img src="./img/obscuring_text.gif" alt="Example - Obscuring text" title="Example - Obscuring text" width="40%">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/img/obscuring_text.gif" alt="Example - Obscuring text" title="Example - Obscuring text" width="40%">
 
 ```dart
 PinCodeFields(
@@ -70,7 +70,7 @@ PinCodeFields(
 
 Complete example at `example/lib/customized.dart`.
 
-<img src="./img/customized.gif" alt="Example - Customized" title="Example - Customized" width="40%">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/img/customized.gif" alt="Example - Customized" title="Example - Customized" width="40%">
 
 ```dart
 PinCodeFields(
@@ -99,7 +99,7 @@ PinCodeFields(
 
 Complete example at `example/lib/animated.dart`.
 
-<img src="./img/animated.gif" alt="Example - Animated" title="Example - Animated" width="40%">
+<img src="https://raw.githubusercontent.com/sanifhimani/flutter_pin_code_fields/master/img/animated.gif" alt="Example - Animated" title="Example - Animated" width="40%">
 
 ```dart
 PinCodeFields(
