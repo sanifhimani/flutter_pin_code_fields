@@ -121,7 +121,7 @@ margin | `EdgeInsets` | `EdgeInsets.all(5.0)` | Margin between the fields.
 padding | `EdgeInsets` | `EdgeInsets.only(bottom: 5.0)` | Padding within the field.
 fieldHeight | `double` || Height of the field.
 fieldWidth | `double` || Width of the field.
-borderWidth | `double` | 2.0 | Width of the border of the field.
+borderWidth | `double` | `2.0` | Width of the border of the field.
 borderRadius | `BorderRadius` || Border raduis of the field.
 borderColor | `Color` | `Colors.grey`| Border color of the field.
 activeBorderColor | `Color` | `Colors.blue`| Border color of the active field.
