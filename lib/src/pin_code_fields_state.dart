@@ -36,7 +36,7 @@ class PinCodeFieldsState extends State<PinCodeFields> {
             padding: const EdgeInsets.only(bottom: 4.0),
             child: AbsorbPointer(
               absorbing: true,
-              child: TextField(
+              child: TextFormField(
                 controller: _textEditingController,
                 focusNode: _focusNode,
                 enabled: widget.enabled,
@@ -45,16 +45,13 @@ class PinCodeFieldsState extends State<PinCodeFields> {
                 keyboardType: widget.keyboardType,
                 enableInteractiveSelection: false,
                 showCursor: false,
-                cursorColor: Colors.blue,
-                cursorWidth: 0.01,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(0),
                   border: InputBorder.none,
                 ),
                 style: TextStyle(
-                  color: Colors.red,
-                  height: 0.01,
-                  fontSize: 0.01,
+                  color: Colors.transparent,
+                  fontSize: 0.6,
                 ),
               ),
             ),
@@ -165,7 +162,11 @@ class PinCodeFieldsState extends State<PinCodeFields> {
       decoration: BoxDecoration(
         color: _getColor(index, "background"),
         borderRadius: widget.borderRadius,
-        border: _generateBorder(index),
+        border: BorderHelper.border(
+          index,
+          widget.fieldBorderStyle,
+          _borderSide(index),
+        ), // _generateBorder(index),
       ),
       child: Center(
         child: AnimatedSwitcher(
@@ -173,7 +174,11 @@ class PinCodeFieldsState extends State<PinCodeFields> {
           switchOutCurve: widget.switchOutAnimationCurve,
           duration: widget.animationDuration,
           transitionBuilder: (child, animation) {
-            return _generateTransitionWidget(child, animation);
+            return TransitionWidget(
+              animation: animation,
+              child: child,
+              animationType: widget.animation,
+            );
           },
           child: Text(
             _getText(index),
@@ -185,177 +190,11 @@ class PinCodeFieldsState extends State<PinCodeFields> {
     );
   }
 
-  Widget _generateTransitionWidget(Widget child, Animation<double> animation) {
-    Widget transitionWidget = FadeTransition(
-      opacity: Tween<double>(
-        begin: 0.0,
-        end: 1.0,
-      ).animate(animation),
-      child: child,
-    );
-
-    switch (widget.animation) {
-      case Animations.fade:
-        break;
-      case Animations.grow:
-        {
-          transitionWidget = ScaleTransition(
-            scale: Tween<double>(
-              begin: 0,
-              end: 1,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-      case Animations.shrink:
-        {
-          transitionWidget = ScaleTransition(
-            scale: Tween<double>(
-              begin: 1.5,
-              end: 1,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-      case Animations.slideInUp:
-        {
-          transitionWidget = SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0, 0.5),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-      case Animations.slideInDown:
-        {
-          transitionWidget = SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0, -0.5),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-      case Animations.slideInLeft:
-        {
-          transitionWidget = SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(-1, 0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-      case Animations.slideInRight:
-        {
-          transitionWidget = SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1, 0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-      case Animations.rotateLeft:
-        {
-          transitionWidget = RotationTransition(
-            turns: Tween<double>(
-              begin: 0.0,
-              end: 1.0,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-      case Animations.rotateRight:
-        {
-          transitionWidget = RotationTransition(
-            turns: Tween<double>(
-              begin: 1.0,
-              end: 0.0,
-            ).animate(animation),
-            child: child,
-          );
-        }
-        break;
-    }
-
-    return transitionWidget;
-  }
-
-  Border _generateBorder(int index) {
-    Border border = Border.all(
-      width: 0,
-      color: Colors.transparent,
-    );
-
-    switch (widget.fieldBorderStyle) {
-      case FieldBorderStyle.top:
-        {
-          border = Border(
-            top: _generateBorderSide(index),
-          );
-        }
-        break;
-      case FieldBorderStyle.bottom:
-        {
-          border = Border(
-            bottom: _generateBorderSide(index),
-          );
-        }
-        break;
-      case FieldBorderStyle.left:
-        {
-          border = Border(
-            left: _generateBorderSide(index),
-          );
-        }
-        break;
-      case FieldBorderStyle.right:
-        {
-          border = Border(
-            right: _generateBorderSide(index),
-          );
-        }
-        break;
-      case FieldBorderStyle.leftRight:
-        {
-          border = Border.symmetric(
-            horizontal: _generateBorderSide(index),
-          );
-        }
-        break;
-      case FieldBorderStyle.topBottom:
-        {
-          border = Border.symmetric(
-            vertical: _generateBorderSide(index),
-          );
-        }
-        break;
-      case FieldBorderStyle.square:
-        {
-          border = Border.symmetric(
-            vertical: _generateBorderSide(index),
-            horizontal: _generateBorderSide(index),
-          );
-        }
-        break;
-    }
-
-    return border;
-  }
-
-  BorderSide _generateBorderSide(int index) {
-    return BorderSide(
-      width: widget.borderWidth,
-      color: _getColor(index, "border"),
+  BorderSide _borderSide(int index) {
+    return BorderSideHelper.borderSide(
+      index,
+      widget.borderWidth,
+      _getColor(index, "border"),
     );
   }
 
