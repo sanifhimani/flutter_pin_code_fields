@@ -1,3 +1,9 @@
+## [2.0.0]
+- Fix for flutter web - not accepting keyboard inputs.
+- Code cleanup/ refactoring
+- Add test suite
+- Setup CI
+
 ## [1.2.0]
 - Support null safety
 - Updated SDK version
