@@ -1,7 +1,8 @@
 name: example
 description: Example on how to use the flutter_pin_code_fields package.
 
-version: 1.0.0+1
+version: 2.0.0
+publish_to: none
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
