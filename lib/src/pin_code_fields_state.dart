@@ -39,6 +39,9 @@ class PinCodeFieldsState extends State<PinCodeFields> {
               child: TextFormField(
                 controller: _textEditingController,
                 focusNode: _focusNode,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(widget.length),
+                ],
                 enabled: widget.enabled,
                 autofocus: widget.autofocus,
                 autocorrect: false,
