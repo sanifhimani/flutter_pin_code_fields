@@ -84,6 +84,7 @@ PinCodeFields(
   activeBackgroundColor: Colors.white,
   borderRadius: BorderRadius.circular(20.0),
   keyboardType: TextInputType.number,
+  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
   autoHideKeyboard: false,
   fieldBackgroundColor: Colors.black12,
   borderColor: Colors.black12,
@@ -114,34 +115,35 @@ PinCodeFields(
 ```
 
 # Properties
-Name | Type | Default | Description
-| --- |---|---|---|
-length | `int` | `4` | Total number of pin code fields.
-margin | `EdgeInsets` | `EdgeInsets.all(5.0)` | Margin between the fields.
-padding | `EdgeInsets` | `EdgeInsets.only(bottom: 5.0)` | Padding within the field.
-fieldHeight | `double` || Height of the field.
-fieldWidth | `double` || Width of the field.
-borderWidth | `double` | `2.0` | Width of the border of the field.
-borderRadius | `BorderRadius` || Border raduis of the field.
-borderColor | `Color` | `Colors.grey`| Border color of the field.
-activeBorderColor | `Color` | `Colors.blue`| Border color of the active field.
-fieldBorderStyle | `FieldBorderStyle` | `FieldBorderStyle.bottom` | Border styles of the field.
-fieldBackgroundColor | `Color` | `Colors.transparent` | Background color of the fields.
-activeBackgroundColor | `Color` | `Colors.transparent` | Background color of the active field.
-enabled | `bool` | `true` | Enable/ disable editing the fields.
-responsive | `bool` | `true` | Adjust the size of the fields automatically to the available space.
-autofocus | `bool` | `false` | Enable/ disabled autofocus.
-textStyle | `TextStyle` || Text style for the fields.
-obscureText | `bool` | `false` | Enable/ disable obscuring the text in the fields.
-obscureCharacter | `String` | `*` | Character to obscure the text in the fields.
-keyboardType | `TextInputType` | `TextInputType.visiblePassword` | Keyboard type.
-autoHideKeyboard | `bool` | `true` | Hides the keyboard automatically on complete.
-animation | `Animations` | `Animations.fade` | Animation for the fields.
-animationDuration | `Duration` | `Duration(milliseconds: 150)` | Duration of the animation.
-animationCurve | `Curve` | `Curves.easeInOut` | Animation curve.
-switchInAnimationCurve | `Curve` | `Curves.easeIn` | Switch in animation curve.
-switchOutAnimationCurve | `Curve` | `Curves.easeOut` | Switch out animation curve.
+Name | Type                    | Default | Description
+| --- |-------------------------|--|---|
+length | `int`                   | `4` | Total number of pin code fields.
+margin | `EdgeInsets`            | `EdgeInsets.all(5.0)` | Margin between the fields.
+padding | `EdgeInsets`            | `EdgeInsets.only(bottom: 5.0)` | Padding within the field.
+fieldHeight | `double`                || Height of the field.
+fieldWidth | `double`                || Width of the field.
+borderWidth | `double`                | `2.0` | Width of the border of the field.
+borderRadius | `BorderRadius`          || Border raduis of the field.
+borderColor | `Color`                 | `Colors.grey`| Border color of the field.
+activeBorderColor | `Color`                 | `Colors.blue`| Border color of the active field.
+fieldBorderStyle | `FieldBorderStyle`      | `FieldBorderStyle.bottom` | Border styles of the field.
+fieldBackgroundColor | `Color`                 | `Colors.transparent` | Background color of the fields.
+activeBackgroundColor | `Color`                 | `Colors.transparent` | Background color of the active field.
+enabled | `bool`                  | `true` | Enable/ disable editing the fields.
+responsive | `bool`                  | `true` | Adjust the size of the fields automatically to the available space.
+autofocus | `bool`                  | `false` | Enable/ disabled autofocus.
+textStyle | `TextStyle`             || Text style for the fields.
+obscureText | `bool`                  | `false` | Enable/ disable obscuring the text in the fields.
+obscureCharacter | `String`                | `*` | Character to obscure the text in the fields.
+keyboardType | `TextInputType`         | `TextInputType.visiblePassword` | Keyboard type.
+inputFormatters | List<TextInputFormatter> || Input formatters for the fields.
+autoHideKeyboard | `bool`                  | `true` | Hides the keyboard automatically on complete.
+animation | `Animations`            | `Animations.fade` | Animation for the fields.
+animationDuration | `Duration`              | `Duration(milliseconds: 150)` | Duration of the animation.
+animationCurve | `Curve`                 | `Curves.easeInOut` | Animation curve.
+switchInAnimationCurve | `Curve`                 | `Curves.easeIn` | Switch in animation curve.
+switchOutAnimationCurve | `Curve`                 | `Curves.easeOut` | Switch out animation curve.
 controller | `TextEditingController` || Text editing controller for the fields.
-focusNode | `FocusNode` || Focus node for the fields.
-onChange | `ValueChanged<String>` || Callback that returns text on input.
-onComplete [`required`] | `ValueChanged<String>` || Callback that returns text on filling all the fields.
+focusNode | `FocusNode`             || Focus node for the fields.
+onChange | `ValueChanged<String>`  || Callback that returns text on input.
+onComplete [`required`] | `ValueChanged<String>`  || Callback that returns text on filling all the fields.
