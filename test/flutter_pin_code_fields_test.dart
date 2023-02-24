@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -22,6 +23,34 @@ void main() {
     );
   });
 
+  testWidgets("Create pin code field with input formatter",
+      (WidgetTester tester) async {
+    TextEditingController controller = TextEditingController();
+    FocusNode focusNode = FocusNode();
+
+    await pumpMaterialWidget(
+      tester,
+      PinCodeFields(
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        controller: controller,
+        focusNode: focusNode,
+        autofocus: true,
+        onComplete: (text) => print(text),
+      ),
+    );
+
+    await tester.enterText(find.byType(TextFormField), "123");
+    await tester.pumpAndSettle();
+
+    expect("123", controller.text);
+
+    await tester.enterText(find.byType(TextFormField), "1.,");
+    await tester.pumpAndSettle();
+
+    expect("1", controller.text);
+  });
+
   testWidgets("Get pin on complete", (WidgetTester tester) async {
     TextEditingController controller = TextEditingController();
     await pumpMaterialWidget(
@@ -32,6 +61,8 @@ void main() {
       ),
     );
     await tester.enterText(find.byType(TextFormField), '1234');
+    await tester.pumpAndSettle();
+
     expect("1234", controller.text);
   });
 
@@ -48,6 +79,7 @@ void main() {
         onComplete: (text) => print(text),
       ),
     );
+    await tester.pumpAndSettle();
 
     expect(focusNode.hasFocus, true);
   });
@@ -67,6 +99,7 @@ void main() {
         onComplete: (text) => print(text),
       ),
     );
+    await tester.pumpAndSettle();
 
     expect(focusNode.hasFocus, false);
   });
