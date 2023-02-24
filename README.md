@@ -136,7 +136,7 @@ textStyle | `TextStyle`             || Text style for the fields.
 obscureText | `bool`                  | `false` | Enable/ disable obscuring the text in the fields.
 obscureCharacter | `String`                | `*` | Character to obscure the text in the fields.
 keyboardType | `TextInputType`         | `TextInputType.visiblePassword` | Keyboard type.
-inputFormatters | List<TextInputFormatter> || Input formatters for the fields.
+inputFormatters | `List<TextInputFormatter>` || Input formatters for the fields.
 autoHideKeyboard | `bool`                  | `true` | Hides the keyboard automatically on complete.
 animation | `Animations`            | `Animations.fade` | Animation for the fields.
 animationDuration | `Duration`              | `Duration(milliseconds: 150)` | Duration of the animation.
