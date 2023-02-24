@@ -74,6 +74,9 @@ class PinCodeFields extends StatefulWidget {
   /// Default keyboard type is TextInputType.visiblePassword
   final TextInputType keyboardType;
 
+  /// Input formatters for the fields
+  final List<TextInputFormatter>? inputFormatters;
+
   /// Auto hide keyboard on complete
   /// Default is true
   final bool autoHideKeyboard;
@@ -133,6 +136,7 @@ class PinCodeFields extends StatefulWidget {
     this.obscureText = false,
     this.obscureCharacter = "*",
     this.keyboardType = TextInputType.visiblePassword,
+    this.inputFormatters,
     this.autoHideKeyboard = true,
     this.animation = Animations.fade,
     this.animationDuration = const Duration(milliseconds: 150),
