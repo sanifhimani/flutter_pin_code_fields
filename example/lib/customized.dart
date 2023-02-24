@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 
 void main() {
@@ -44,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
               activeBackgroundColor: Colors.white,
               borderRadius: BorderRadius.circular(20.0),
               keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               autoHideKeyboard: false,
               fieldBackgroundColor: Colors.black12,
               borderColor: Colors.black12,
