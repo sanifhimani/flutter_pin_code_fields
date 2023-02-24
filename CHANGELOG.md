@@ -1,3 +1,6 @@
+## [2.1.1]
+- Add support for input formatters
+
 ## [2.0.1]
 - Fix README
 
