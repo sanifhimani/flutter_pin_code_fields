@@ -11,6 +11,7 @@ A Flutter package to generate customizable pin code fields.
 * Responsive
 * Supports animations
 * Supports autofocus
+* Supports autofill
 * Supports obscuring text with custom character
 
 # Usage

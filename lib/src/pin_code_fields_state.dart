@@ -40,6 +40,7 @@ class PinCodeFieldsState extends State<PinCodeFields> {
                 controller: _textEditingController,
                 focusNode: _focusNode,
                 enabled: widget.enabled,
+                autofillHints: widget.autofillHints,
                 autofocus: widget.autofocus,
                 autocorrect: false,
                 keyboardType: widget.keyboardType,
