@@ -1,3 +1,6 @@
+## [2.2.0]
+- Add support for auto fill hints
+
 ## [2.1.0]
 - Add support for input formatters
 
