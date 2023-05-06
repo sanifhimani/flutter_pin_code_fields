@@ -59,6 +59,9 @@ class PinCodeFields extends StatefulWidget {
   /// Default is false
   final bool autofocus;
 
+  /// A list of strings that helps the autofill service identify the type of this text input.
+  final Iterable<String>? autofillHints;
+
   /// Custom text style
   final TextStyle textStyle;
 
@@ -147,6 +150,7 @@ class PinCodeFields extends StatefulWidget {
     this.focusNode,
     this.onChange,
     required this.onComplete,
+    this.autofillHints,
   });
 
   @override
